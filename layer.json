@@ -1,0 +1,10 @@
+{
+	"tpl":"-photoreports/layout.tpl",
+	"jsontpl":"-photoreports/?type=list&name={crumb.name}",
+	"layers":{
+		"deep":1,
+		"tpl":"-photoreports/layout.tpl",
+		"jsontpl":"-photoreports/?type=page&name={crumb.name}&id={crumb.child.name}",
+		"tplroot":"page"
+	}
+}
