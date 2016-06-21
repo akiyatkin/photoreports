@@ -13,18 +13,23 @@
 			{preview}
 			<div>{~date(:j F Y,date)}</div>
 			<div class="text-right">
-				
 				<a data-anchor=".breadcrumb" href="/{crumb}/{name}">Подробней</a>
 			</div>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-sm-6 phorts-preview">
+			<style scoped>
+				.phorts-preview img {
+					padding:2px;
+					width:25%;
+				}
+			</style>
 			{gallery::img}
 			{~length(gallery)>:0?:imgmore}
 			<div class="clear:both"></div>
 		</div>
 	</div>
 	{imgmore:}<div class="text-right"><a data-anchor=".breadcrumb" href="/{crumb}/{name}#show">Показать</a></div>
-	{img:}{~key<:8?:imgshow}{imgshow:}<a data-anchor=".breadcrumb" href="/{crumb}/{...name}#{.}"><img style="width:25%" src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{.}"></a>
+	{img:}{~key<:8?:imgshow}{imgshow:}<a data-anchor=".breadcrumb" href="/{crumb}/{...name}#{.}"><img src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{.}"></a>
 {page:}
 	<ol class="breadcrumb">
 		<li><a href="/">Главная</a></li>
@@ -32,12 +37,24 @@
 		<li class="active">{data.info.heading}</li>
 	</ol>
 	{data.text}
-	<div class="gallery">
+	<div class="phorts-list">
+		<style scoped>
+			.phorts-list {
+				margin-left:-5px;
+				margin-right:-5px;
+			}
+			.phorts-list img {
+				padding:5px;
+				width:20%;
+			}
+		</style>
 		{data.info.gallery::bigimg}
 	</div>
+	<a href="/{parent.crumb}">{parent.config.title}</a>
 	<script>
 		domready(function(){
-			$('.gallery a').magnificPopup({
+			var div=$('.phorts-list');
+			div.find('a').magnificPopup({
 				type: 'image',
 				gallery:{
 					enabled:true
@@ -47,7 +64,7 @@
 			if(hash){
 				hash = hash.replace(/^#/,'');
 				if (hash=='show') {
-					$('.gallery a:first').click();
+					div.find('a:first').click();
 				} else {
 					
 					var el = document.getElementById('img-'+hash);
