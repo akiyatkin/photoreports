@@ -41,7 +41,7 @@ if ($type == 'list') {
 		if (!is_file($dir.$file)) return;
 		$fd = Load::nameinfo($file);
 		if (!in_array($fd['ext'], array('docx', 'html'))) return;
-		$list[] = Rubrics::info($src.$file);
+		$list[] = Rubrics::info(Path::toutf($src.$file));
 	}, scandir ($dir));
 
 	$ans['list'] = $list;
