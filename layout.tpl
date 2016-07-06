@@ -54,6 +54,10 @@
 	<script>
 		domready(function(){
 			var div=$('.phorts-list');
+			if (!div.magnificPopup) {
+				console.info('Требуется magnificPopup');
+				return;
+			}
 			div.find('a').magnificPopup({
 				type: 'image',
 				gallery:{
