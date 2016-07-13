@@ -40,10 +40,12 @@ if ($type == 'list') {
 		if ($file{0} == '~') return;//Скрытый файл Word
 		if (!is_file($dir.$file)) return;
 		$fd = Load::nameinfo($file);
-		if (!in_array($fd['ext'], array('docx', 'html'))) return;
+		if (!in_array($fd['ext'], array('docx', 'html', 'tpl'))) return;
 		$list[] = Rubrics::info(Path::toutf($src.$file));
 	}, scandir ($dir));
 
+	$list = array_reverse($list);
+	
 	$ans['list'] = $list;
 } else if ($type == 'page') {
 	if ($type == 'page') $id = Ans::GET('id');
