@@ -29,12 +29,11 @@ $name = Ans::GET('name');
 if (!$name) return Ans::err($ans, 'Необходимо параметр name');
 if (preg_match('/\//',$name)) return Ans::err($ans, 'name содержит запрещённые символы '.$name);
 
-$src = '~'.$name.'/';
+$dir = '~'.$name.'/';
 
-$dir = Path::theme($src);
-if (!$dir) return Ans::err($ans, 'Папка с фотогалереями не найдена '.$src);
+if (!Path::theme($dir)) return Ans::err($ans, 'Папка с фотогалереями не найдена '.$dir);
 
-$ans['src'] = $src;
+$ans['src'] = $dir;
 
 if ($type == 'list') {
 	$lim = Ans::GET('lim','string','0,100');
@@ -42,19 +41,19 @@ if ($type == 'list') {
 	if (sizeof($p) != 2) return Ans::err($ans, 'Некорректный параметр lim');
 	list($start, $count) = $p;
 
-	$list = Access::cache(__FILE__, function(){
+	$list = Access::cache(__FILE__, function ($dir) {
 		$list = array();
-		array_map(function ($file) use (&$list, $dir, $src) {
+		array_map(function ($file) use (&$list, $dir) {
 			if ($file{0} == '.') return;
 			if ($file{0} == '~') return;//Скрытый файл Word
-			if (!is_file($dir.$file)) return;
+			if (!is_file(Path::theme($dir).$file)) return;
 			$fd = Load::nameinfo($file);
 			if (!in_array($fd['ext'], array('docx', 'html', 'tpl'))) return;
-			$list[] = Rubrics::info(Path::toutf($src.$file));
-		}, scandir ($dir));
+			$list[] = Rubrics::info(Path::toutf($dir.$file));
+		}, scandir(Path::theme($dir)));
 		Load::sort($list);
 		return $list;
-	});
+	}, array($dir));
 	$list = array_slice($list, $start, $count);
 	
 	
@@ -62,7 +61,7 @@ if ($type == 'list') {
 } else if ($type == 'page') {
 	if ($type == 'page') $id = Ans::GET('id');
 	if (!$id) return Ans::err($ans, 'Для type=page необходимо указать id страницы');
-	$src = Rubrics::find($src, $id);
+	$src = Rubrics::find($dir, $id);
 	$ans['info'] = Rubrics::info($src);
 	$ans['text'] = Rubrics::article($src);
 }
