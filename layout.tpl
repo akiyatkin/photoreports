@@ -11,7 +11,7 @@
 		<div class="col-sm-6">
 			
 			{preview}
-			<div>{~date(:j F Y,date)}</div>
+			<div><i>{~date(:j F Y,date)}</i></div>
 			<div class="text-right">
 				<a data-anchor=".breadcrumb" href="/{crumb}/{name}">Подробней</a>
 			</div>
@@ -24,11 +24,9 @@
 				}
 			</style>
 			{gallery::img}
-			{~length(gallery)>:0?:imgmore}
 			<div class="clear:both"></div>
 		</div>
 	</div>
-	{imgmore:}<div class="text-right"><a data-anchor=".breadcrumb" href="/{crumb}/{name}#show">Показать</a></div>
 	{img:}{~key<:8?:imgshow}{imgshow:}<a data-anchor=".breadcrumb" href="/{crumb}/{...name}#{.}"><img src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{.}"></a>
 {page:}
 	<ol class="breadcrumb">
