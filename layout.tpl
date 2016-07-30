@@ -28,11 +28,12 @@
 		</div>
 	</div>
 	{img:}{~key<:8?:imgshow}{imgshow:}<a data-anchor=".breadcrumb" href="/{crumb}/{...name}#{.}"><img src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{.}"></a>
+{breadpage:}<li class="active">{data.info.heading}</li>
 {page:}
 	<ol class="breadcrumb">
 		<li><a href="/">Главная</a></li>
 		<li><a data-anchor=".breadcrumb" href="/{parent.crumb}">{parent.config.title}</a></li>
-		<li class="active">{data.info.heading}</li>
+		{data.info.heading:breadpage}
 	</ol>
 	{data.text}
 	<div class="phorts-list">
