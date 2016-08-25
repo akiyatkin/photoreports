@@ -8,7 +8,7 @@
 ```json
 {
 	"require":{
-		"infrajs/photoreports":"~1"
+		"akiyatkin/photoreports":"~1"
 	}
 }
 ```
