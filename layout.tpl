@@ -23,6 +23,7 @@
 					width:25%;
 				}
 			</style>
+
 			{gallery?gallery::img?(video?video::video?images::images)}
 			<div class="clear:both"></div>
 		</div>
