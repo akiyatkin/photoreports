@@ -1,6 +1,9 @@
 {
 	"tpl":"-photoreports/layout.tpl",
-	"jsontpl":"-photoreports/?type=list&name={crumb.name}",
+	"jsontpl":"-photoreports/?type=list&name={crumb.name}&order={config.order}",
+	"config":{
+		"order":"descending"
+	},
 	"layers":{
 		"deep":1,
 		"seojsontpl":"~{crumb.name}/{crumb.child.name}.json",

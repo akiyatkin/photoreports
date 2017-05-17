@@ -40,8 +40,10 @@ if ($type == 'list') {
 	$p = explode(',', $lim);
 	if (sizeof($p) != 2) return Ans::err($ans, 'Некорректный параметр lim');
 	list($start, $count) = $p;
-
-	$list = Access::cache(__FILE__, function ($dir) {
+	
+	$order = Ans::GET('order',['ascending','descending'], 'descending');
+	
+	$list = Access::cache(__FILE__, function ($dir, $order) {
 		$list = array();
 		array_map(function ($file) use (&$list, $dir) {
 			if ($file{0} == '.') return;
@@ -51,9 +53,9 @@ if ($type == 'list') {
 			if (!in_array($fd['ext'], array('docx', 'html', 'tpl'))) return;
 			$list[] = Rubrics::info(Path::toutf($dir.$file));
 		}, scandir(Path::theme($dir)));
-		Load::sort($list);
+		Load::sort($list, $order);
 		return $list;
-	}, array($dir));
+	}, array($dir, $order));
 	$list = array_slice($list, $start, $count);
 	
 	
