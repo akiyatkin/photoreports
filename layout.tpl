@@ -23,11 +23,12 @@
 					width:25%;
 				}
 			</style>
-			{gallery::img}
+			{gallery?gallery::img?video::video}
 			<div class="clear:both"></div>
 		</div>
 	</div>
 	{img:}{~key<:8?:imgshow}{imgshow:}<a data-anchor=".breadcrumb" href="/{crumb}/{...name}#{.}"><img src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{.}"></a>
+	{video:}{~key<:8?:imgshow2}{imgshow2:}<a href="/{crumb}/{...name}"><img src="https://i.ytimg.com/vi/{id}/hqdefault.jpg"></a>
 {breadpage:}<li class="active">{data.info.heading}</li>
 {page:}
 	<ol class="breadcrumb">
