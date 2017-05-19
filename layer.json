@@ -1,8 +1,11 @@
 {
 	"tpl":"-photoreports/layout.tpl",
-	"jsontpl":"-photoreports/?type=list&name={crumb.name}&order={config.order}",
+	"jsontpl":"-photoreports/?type=list&src={config.src}&order={config.order}",
 	"config":{
 		"order":"descending"
+	},
+	"configtpl":{
+		"src":"~{crumb.name}/"
 	},
 	"layers":{
 		"deep":1,

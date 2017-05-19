@@ -8,6 +8,7 @@
 		"infrajs/ans":"~1",
 		"infrajs/layer-deep":"~1",
 		"infrajs/path":"~1",
+		"infrajs/layer-config":"~1",
 		"infrajs/rubrics":"~1",
 		"infrajs/config":"~1",
 		"infrajs/load":"~1"

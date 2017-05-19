@@ -25,15 +25,13 @@ if (!in_array($type, $types)) return Ans::err($ans, 'Неожиданный type
 
 
 
-$name = Ans::GET('name');
-if (!$name) return Ans::err($ans, 'Необходимо параметр name');
-if (preg_match('/\//',$name)) return Ans::err($ans, 'name содержит запрещённые символы '.$name);
+$src = Ans::GET('src');
+if (!$src) return Ans::err($ans, 'Необходимо параметр src');
+if (!Path::isNest('~', $src)) return Ans::err($ans, 'Передан некорректный или небезопасный путь');
 
-$dir = '~'.$name.'/';
+if (!Path::theme($src)) return Ans::err($ans, 'Папка с фотогалереями не найдена '.$src);
 
-if (!Path::theme($dir)) return Ans::err($ans, 'Папка с фотогалереями не найдена '.$dir);
-
-$ans['src'] = $dir;
+$ans['src'] = $src;
 
 if ($type == 'list') {
 	$lim = Ans::GET('lim','string','0,100');
@@ -43,19 +41,19 @@ if ($type == 'list') {
 	
 	$order = Ans::GET('order',['ascending','descending'], 'descending');
 	
-	$list = Access::cache(__FILE__, function ($dir, $order) {
+	$list = Access::cache(__FILE__, function ($src, $order) {
 		$list = array();
-		array_map(function ($file) use (&$list, $dir) {
+		array_map(function ($file) use (&$list, $src) {
 			if ($file{0} == '.') return;
 			if ($file{0} == '~') return;//Скрытый файл Word
-			if (!is_file(Path::theme($dir).$file)) return;
+			if (!is_file(Path::theme($src).$file)) return;
 			$fd = Load::nameinfo($file);
 			if (!in_array($fd['ext'], array('docx', 'html', 'tpl'))) return;
-			$list[] = Rubrics::info(Path::toutf($dir.$file));
-		}, scandir(Path::theme($dir)));
+			$list[] = Rubrics::info(Path::toutf($src.$file));
+		}, scandir(Path::theme($src)));
 		Load::sort($list, $order);
 		return $list;
-	}, array($dir, $order));
+	}, array($src, $order));
 	$list = array_slice($list, $start, $count);
 	
 	
@@ -63,9 +61,11 @@ if ($type == 'list') {
 } else if ($type == 'page') {
 	if ($type == 'page') $id = Ans::GET('id');
 	if (!$id) return Ans::err($ans, 'Для type=page необходимо указать id страницы');
-	$src = Rubrics::find($dir, $id);
-	$ans['info'] = Rubrics::info($src);
-	$ans['text'] = Rubrics::article($src);
+	$src = Rubrics::find($src, $id);
+	if ($src) {
+		$ans['info'] = Rubrics::info($src);
+		$ans['text'] = Rubrics::article($src);
+	}
 }
 
 return Ans::ret($ans);

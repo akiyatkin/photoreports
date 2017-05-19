@@ -21,7 +21,8 @@
 			
 	"crumb":"reports",
 	"config":{
-		"title":"Фотоотчёты"
+		"title":"Фотоотчёты",
+		"order":"descending"
 	},
 	"external":"-photoreports/layer.json"
 }
