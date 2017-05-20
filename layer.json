@@ -9,9 +9,9 @@
 	},
 	"layers":{
 		"deep":1,
-		"seojsontpl":"~{crumb.name}/{crumb.child.name}.json",
+		"seojsontpl":"{parent.config.src}/{crumb.child.name}.json",
 		"tpl":"-photoreports/layout.tpl",
-		"jsontpl":"-photoreports/?type=page&name={crumb.name}&id={crumb.child.name}",
+		"jsontpl":"-photoreports/?type=page&src={parent.config.src}&id={crumb.child.name}",
 		"tplroot":"page"
 	}
 }
