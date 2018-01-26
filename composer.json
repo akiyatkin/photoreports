@@ -1,7 +1,6 @@
 {
 	"name": "akiyatkin/photoreports",
 	"description": "Раздел с фотоотчётами",
-	"license": "GPL3",
 	"require":{
 		"infrajs/controller": "~1",
 		"infrajs/router":"~1",
