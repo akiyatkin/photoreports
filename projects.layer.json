@@ -1,0 +1,13 @@
+{
+	"tpl":"-photoreports/projects.tpl",
+	"jsontpl":"-photoreports/?type=list&src={config.src}&order={config.order}&chunk={config.chunk}&lim={config.lim}",
+	"config":{
+		"chunk":4,
+		"color":"#d8d8d8",
+		"coloractive":"#3d94bf",
+		"colorhover":"#e58f1e",
+		"lim":"0,32",
+		"src":"~projects/",
+		"order":"descending"
+	}
+}

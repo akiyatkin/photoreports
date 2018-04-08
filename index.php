@@ -2,28 +2,19 @@
 use infrajs\config\Config;
 use infrajs\router\Router;
 use infrajs\ans\Ans;
+use akiyatkin\boo\Cache;
 use infrajs\path\Path;
 use infrajs\load\Load;
 use infrajs\access\Access;
 use infrajs\rubrics\Rubrics;
 
-if (!is_file('vendor/autoload.php')) {
-	chdir('../');
-	require_once('vendor/autoload.php');
-	Router::init();
-}
-
 $ans = array ();
-
-
 
 $type = Ans::GET('type');
 if (!$type) return Ans::err($ans, 'Необходимо параметр type');
 
 $types = ['list','page'];
 if (!in_array($type, $types)) return Ans::err($ans, 'Неожиданный type '.$type.'. Допустимые: '.implode(', ',$types));
-
-
 
 $src = Ans::GET('src');
 if (!$src) return Ans::err($ans, 'Необходимо параметр src');
@@ -39,9 +30,10 @@ if ($type == 'list') {
 	if (sizeof($p) != 2) return Ans::err($ans, 'Некорректный параметр lim');
 	list($start, $count) = $p;
 	
+	$chunk = Ans::GET('chunk','int',0);
 	$order = Ans::GET('order',['ascending','descending'], 'descending');
 	
-	$list = Access::cache(__FILE__, function ($src, $order) {
+	$list = Cache::func( function ($src, $order) {
 		$list = array();
 		array_map(function ($file) use (&$list, $src) {
 			if ($file{0} == '.') return;
@@ -53,9 +45,14 @@ if ($type == 'list') {
 		}, scandir(Path::theme($src)));
 		Load::sort($list, $order);
 		return $list;
-	}, array($src, $order));
+
+
+	}, array($src, $order),['infrajs\\access\\Access','getDebugTime']);
 	$list = array_slice($list, $start, $count);
 	
+	if ($chunk) {
+		$list = array_chunk($list, $chunk);
+	}
 	
 	$ans['list'] = $list;
 } else if ($type == 'page') {
