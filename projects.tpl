@@ -47,6 +47,12 @@
 				border-radius:15px;	
 				background-color: {config.coloractive};
 			}
+			.phprojects .carousel-control .glyphicon-chevron-left, 
+			.phprojects .carousel-control .glyphicon-chevron-right, 
+			.phprojects .carousel-control .icon-next, 
+			.phprojects .carousel-control .icon-prev {
+				top: 88%;
+			}
 		</style>
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
