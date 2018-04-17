@@ -86,7 +86,7 @@
 		<div class="col-xs-6 col-sm-3 space {~key=:2?:hidden-xs} {~key=:3?:hidden-xs}">
 			<a style="display:block;" href="/projects/{name}">
 				<img class="img-responsive" src="/-imager/?h=300&w=350&crop=1&src={gallerydir}{gallery.0}">
-				{heading}
+				<!--{heading}-->
 			</a>
 		</div>
 	
