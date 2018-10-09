@@ -1,7 +1,7 @@
 {root:}
 	<ol class="breadcrumb">
-		<li><a href="/">Главная</a></li>
-		<li class="active">{config.title}</li>
+		<li class="breadcrumb-item"><a href="/">Главная</a></li>
+		<li class="breadcrumb-item active">{config.title}</li>
 	</ol>
 	<h1>{config.title}</h1>
 	{data.list::show}
@@ -28,14 +28,14 @@
 			<div class="clear:both"></div>
 		</div>
 	</div>
-	{img:}{~key<:8?:imgshow}{imgshow:}<a data-anchor=".breadcrumb" href="/{crumb}/{...name}#{.}"><img src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{.}"></a>
+	{img:}{~key<:8?:imgshow}{imgshow:}<a data-anchor=".breadcrumb" href="/{crumb}/{...name}#{name}"><img src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{file}"></a>
 	{video:}{~key<:8?:imgshow2}{imgshow2:}<a href="/{crumb}/{...name}"><img src="https://i.ytimg.com/vi/{id}/hqdefault.jpg"></a>
 	{images:}{~key<:8?:imgshow3}{imgshow3:}<a href="/{crumb}/{...name}"><img src="/-imager/?src={src}&w=400&h=300&crop=1"></a>
-{breadpage:}<li class="active">{data.info.heading}</li>
+{breadpage:}<li class="breadcrumb-item active">{data.info.heading}</li>
 {page:}
 	<ol class="breadcrumb">
-		<li><a href="/">Главная</a></li>
-		<li><a data-anchor=".breadcrumb" href="/{parent.crumb}">{parent.config.title}</a></li>
+		<li class="breadcrumb-item"><a href="/">Главная</a></li>
+		<li class="breadcrumb-item"><a data-anchor=".breadcrumb" href="/{parent.crumb}">{parent.config.title}</a></li>
 		{data.info.heading:breadpage}
 	</ol>
 	{data.text}
@@ -79,4 +79,4 @@
 			}
 		});
 	</script>
-	{bigimg:}<a id="img-{.}" href="/{...gallerydir}{.}"><img style="width:20%" src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{.}"></a>
+	{bigimg:}<a id="img-{name}" href="/{...gallerydir}{file}"><img style="width:20%" src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{file}"></a>

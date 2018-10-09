@@ -83,10 +83,10 @@
 		</div>
 	</div>
 	{itemslide:}
-		<div class="col-xs-6 col-sm-3 space {~key=:2?:hidden-xs} {~key=:3?:hidden-xs}">
+		<div class="col-6 col-md-3 space {~key=:2?:hidden-xs} {~key=:3?:hidden-xs}">
 			<a style="display:block;" href="/projects/{name}">
-				<img class="img-responsive" src="/-imager/?h=300&w=350&crop=1&src={gallerydir}{gallery.0}">
+				<img class="img-fluid" src="/-imager/?h=300&w=350&crop=1&src={gallerydir}{gallery.0}">
 				<!--{heading}-->
 			</a>
 		</div>
-	
+	{hidden-xs:}d-none d-sm-block
