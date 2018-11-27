@@ -75,7 +75,7 @@
 	<li data-target="#phprojects{counter}" data-slide-to="{~key}"{~first()?:mslidenumactive}></li>
 	{mslidenumactive:} class="active"
 {mslide:}
-	<div class="item {~first()?:active}">
+	<div class="carousel-item {~first()?:active}">
 		<div class="container" style="padding-bottom:50px">
 			<div class="row">
 				{::itemslide}
