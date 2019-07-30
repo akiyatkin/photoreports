@@ -39,6 +39,9 @@
 		{data.info.heading:breadpage}
 	</ol>
 	{data.text}
+	{:GALLERY}
+	<a href="/{parent.crumb}">{parent.config.title}</a>
+{GALLERY:}
 	<div class="phorts-list">
 		<style scoped>
 			.phorts-list {
@@ -52,7 +55,6 @@
 		</style>
 		{data.info.gallery::bigimg}
 	</div>
-	<a href="/{parent.crumb}">{parent.config.title}</a>
 	<script>
 		domready(function(){
 			var div=$('.phorts-list');
