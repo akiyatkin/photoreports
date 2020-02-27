@@ -36,8 +36,8 @@ if ($type == 'list') {
 	$list = Cache::func( function ($src, $order) {
 		$list = array();
 		array_map(function ($file) use (&$list, $src) {
-			if ($file{0} == '.') return;
-			if ($file{0} == '~') return;//Скрытый файл Word
+			if ($file[0] == '.') return;
+			if ($file[0] == '~') return;//Скрытый файл Word
 			if (!is_file(Path::theme($src).$file)) return;
 			$fd = Load::nameinfo($file);
 			if (!in_array($fd['ext'], array('docx', 'html', 'tpl'))) return;
