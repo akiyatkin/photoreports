@@ -56,12 +56,14 @@
 		{data.info.gallery::bigimg}
 	</div>
 	<script>
-		domready(function(){
-			var div=$('.phorts-list');
-			if (!div.magnificPopup) {
-				console.info('Требуется magnificPopup');
-				return;
-			}
+		(async () => {
+			
+			let Load = (await import('/vendor/akiyatkin/load/Load.js')).default
+			let CDN = await Load.on('import-default', '/vendor/akiyatkin/load/CDN.js')
+			await CDN.load('jquery')
+			await CDN.load('magnific-popup')
+
+			var div = $('.phorts-list');
 			div.find('a').magnificPopup({
 				type: 'image',
 				gallery:{
@@ -79,6 +81,6 @@
 					$(el).click();
 				}
 			}
-		});
+		})();
 	</script>
 	{bigimg:}<a id="img-{name}" href="/{...gallerydir}{file}"><img style="width:20%" src="/-imager/?w=400&h=300&crop=1&src={...gallerydir}{file}"></a>
