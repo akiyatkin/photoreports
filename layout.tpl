@@ -55,11 +55,10 @@
 		</style>
 		{data.info.gallery::bigimg}
 	</div>
-	<script>
+	<script type="module">
+		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 		(async () => {
-			
-			let CDN = (await import('/vendor/akiyatkin/load/CDN.js')).default
-			await CDN.load('jquery')
+			await CDN.on('load','jquery')
 			await CDN.load('magnific-popup')
 
 			var div = $('.phorts-list');
