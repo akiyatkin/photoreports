@@ -59,7 +59,7 @@
 		import { CDN } from '/vendor/akiyatkin/load/CDN.js'
 		(async () => {
 			await CDN.on('load','jquery')
-			await CDN.load('magnific-popup')
+			await CDN.on('load','magnific-popup')
 
 			var div = $('.phorts-list');
 			div.find('a').magnificPopup({
