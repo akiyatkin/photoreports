@@ -4,9 +4,6 @@
 	"config":{
 		"order":"descending"
 	},
-	"configtpl":{
-		"src":"~{crumb.name}/"
-	},
 	"layers":{
 		"deep":1,
 		"seojsontpl":"{parent.config.src}/{crumb.child.name}.json",

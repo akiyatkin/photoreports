@@ -2,7 +2,6 @@
 use infrajs\config\Config;
 use infrajs\router\Router;
 use infrajs\ans\Ans;
-use akiyatkin\boo\Cache;
 use infrajs\path\Path;
 use infrajs\load\Load;
 use infrajs\access\Access;
@@ -33,7 +32,7 @@ if ($type == 'list') {
 	$chunk = Ans::GET('chunk','int',0);
 	$order = Ans::GET('order',['ascending','descending'], 'descending');
 	
-	$list = Cache::func( function ($src, $order) {
+	$list = Access::cache('photoreports', function ($src, $order) {
 		$list = array();
 		array_map(function ($file) use (&$list, $src) {
 			if ($file[0] == '.') return;
@@ -47,7 +46,7 @@ if ($type == 'list') {
 		return $list;
 
 
-	}, array($src, $order),['infrajs\\access\\Access','getDebugTime']);
+	}, array($src, $order));
 	$list = array_slice($list, $start, $count);
 	
 	if ($chunk) {
